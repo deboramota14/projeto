@@ -11,22 +11,28 @@
 	// 	exibir("produto/carrinho",$dados);
 	// }
 
-	function index(){
-		if (!empty($_SESSION["carrinho"])) {
+function index(){
+	if (!empty($_SESSION["carrinho"])) {
 		$carrinho = $_SESSION["carrinho"];
+                $prod = array();
 
 		for ($i=0; $i < count($carrinho); $i++) { 
-			$dados["carrinho"] = pegarProdutoPorId($carrinho[$i]);	
-		}
+			 $produto = pegarProdutoPorId($carrinho[$i]["id"]);	
+                         $prod["idproduto"] = $carrinho[$i]["id"];
 
+                         $prod["quantidade"]=1;
+                         $prod['preco'] = $produto['preco'];
+                         $produtos[] = $prod;
+		}
+                $dados["carrinho"] = $produtos;
 		exibir("produto/carrinho",$dados);
 		}else{
 			exibir("produto/carrinho");
 		}
-	}
+}
 
-	/** anon */
-	function adicionar($id)
+/** anon */
+function adicionar($id)
 {
     if (!isset($_SESSION["carrinho"])) {
         $_SESSION["carrinho"] = array();

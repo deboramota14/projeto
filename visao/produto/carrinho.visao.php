@@ -12,16 +12,14 @@
         </tr>
     </thead>
        
-    <?php for ($i = 0;$i < count($_SESSION["carrinho"]);$i++) {
-    ?>
-    <tr>
-        <td><?=$_SESSION["carrinho"][$i]['idProduto']?></td>        
-        <td><?=$_SESSION["carrinho"][$i]['nomeproduto']?></td>
-        <td><?=$_SESSION["carrinho"][$i]['preco']?></td>
-        <td><?=$_SESSION["carrinho"][$i]['quantidade']?></td>
-        <td><a href="./carrinho/deletar/<?=$i?>">excluir</a></td>
+    <?php foreach ($carrinho as $produtos): ?>
+    <tr>    
+        <td><?=$produtos['idproduto']?></td>
+        <td><?=$produtos['nomeproduto']?></td>
+        <td><?=$produtos['preco']?></td>
+        <td><?=$produtos['quantidade']?></td>
     </tr>
       
-    <?php } ?>   
+    <?php endforeach; ?>   
 </table>
 
