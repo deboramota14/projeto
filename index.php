@@ -10,7 +10,12 @@ if(!$controllerName && CONTROLADOR_PADRAO) {
 	$controllerName = CONTROLADOR_PADRAO;
 }
 
+if($controllerName=="?XDEBUG_SESSION_START=netbeans-xdebug") {
+    $controllerName = CONTROLADOR_PADRAO;
+}
+
 $controllerFileName = "controlador/" . $controllerName . "Controlador.php";
+
 
 if (!file_exists($controllerFileName)) 
     die("Nao foi encontrado o arquivo: '$controllerFileName' para enviar a solicitacao!"); 
@@ -52,7 +57,7 @@ try {
                 call_user_func_array($action, $params); //chama a funcao passando parametros   
         } else {
                 alert($authMsg, "warning");
-                redirect("login"); die();
+                redirecionar("login"); die();
         }
 
 

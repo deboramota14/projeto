@@ -1,13 +1,16 @@
 <?php
-
+require_once 'modelo/usuarioModelo.php';
 define('AUTENTICADOR', true);
 
 function authLogin($login, $passwd) {
-    if ($login === "admin" && $passwd == "123") {
+   $user = pegardoBanco($login);
+   
+    if ($passwd == $user['senha'] && $user['tipouser'] == 1) {
         $_SESSION["auth"] = array("user" => "admin", "role" => "admin");
+        //print(authGetUserRole());
         return true;
     }
-    if ($login === "user" && $passwd == "123") {
+    if ($passwd == $user['senha'] && $user['tipouser'] == 0) {
         $_SESSION["auth"] = array("user" => "user", "role" => "user");
         return true;
     }

@@ -14,5 +14,7 @@
 
 	
 	<button type="submit" class="btn btn-primary">vai login</button>
+        
+        <a href="./usuario/adicionar">Cadastre-se</a>
 
 </form>
