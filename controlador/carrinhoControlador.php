@@ -1,9 +1,9 @@
 
 <?php 
-	require "./servicos/carrinhoServico.php";
-	require "./modelo/produtoModelo.php";
+require "./servicos/carrinhoServico.php";
+require "./modelo/produtoModelo.php";
 
-	/** anon */
+/** anon */
 
 	// function index(){
 	// 	$carrinhoProdutos = $_SESSION["carrinho"];
@@ -14,21 +14,23 @@
 function index(){
 	if (!empty($_SESSION["carrinho"])) {
 		$carrinho = $_SESSION["carrinho"];
-                $prod = array();
+        $prod = array();
 
-		for ($i=0; $i < count($carrinho); $i++) { 
-			 $produto = pegarProdutoPorId($carrinho[$i]["id"]);	
-                         $prod["idproduto"] = $carrinho[$i]["id"];
+        for ($i=0; $i < count($carrinho); $i++) { 
+            $produto = pegarProdutoPorId($carrinho[$i]["id"]);	
+            $prod["idproduto"] = $carrinho[$i]["id"];
 
-                         $prod["quantidade"]=1;
-                         $prod['preco'] = $produto['preco'];
-                         $produtos[] = $prod;
-		}
-                $dados["carrinho"] = $produtos;
-		exibir("produto/carrinho",$dados);
-		}else{
-			exibir("produto/carrinho");
-		}
+            $prod['nomeproduto'] = $produto['nomeproduto'];
+            $prod['preco'] = $produto['preco'];
+            $produtos[] = $prod;
+        }
+        $dados["carrinho"] = $produtos;
+        exibir("produto/carrinho",$dados);
+    }else{
+       exibir("produto/carrinho");
+                     //echo "<h2>vazio!</h2>";
+       
+   }
 }
 
 /** anon */
@@ -56,15 +58,30 @@ function adicionar($id)
         $_SESSION["carrinho"][] = $produto;
     }
 
- 
-   
+    
+    
     redirecionar("carrinho");
 }	
 
-	/** anon */
-	function deletar($id){
-		unset($_SESSION["carrinho"][$id]);
-		redirecionar("carrinho/index");
-	}
+/** anon */
+function deletar($id){
+// Códugi da thasmires para excluir todas as quantidade do produto que está sendo passado por parametro nessa função 
+    for ($i=0; $i < count($_SESSION["carrinho"]); $i++) {
+        if ($_SESSION["carrinho"][$i]["id"] == $id) {
+        //echo $_SESSION["carrinho"][$i]["quantidade"];
+            $_SESSION["carrinho"][$i]["quantidade"] = $_SESSION["carrinho"][$i]["quantidade"] - 1;
+            if ($_SESSION["carrinho"][$i]["quantidade"] == 0) {
+               unset($_SESSION["carrinho"][$i]);
+               $_SESSION["carrinho"] = array_values($_SESSION["carrinho"]);   
+           }
+           redirecionar("carrinho/index");
+       } 
+   }
+
+
+
+
+
+}
 
 ?>
