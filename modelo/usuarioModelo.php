@@ -18,6 +18,10 @@ function pegarUsuarioPorId($id) {
 }
 
 function adicionarUsuario($nome, $cpf, $email, $telefone, $sexo, $senha, $tipouser) {
+    if (!authGetUserRole() == 'admin'){
+        $tipouser = '0';
+    }
+    
     $sql = "INSERT INTO tblusuario (nomeusuario, cpf, email, telefone, sexo, senha, tipouser) 
 			VALUES ('$nome', '$cpf', '$email', '$telefone', '$sexo', '$senha', '$tipouser')";
     $resultado = mysqli_query($cnx = conn(), $sql);
@@ -40,7 +44,8 @@ function deletarUsuario($id) {
             
 }
 function pegardoBanco($login){
-    $sql = "SELECT * FROM tblusuario WHERE email= '$login'";
+    $retorno = mysqli_real_escape_string(conn(), $login);
+    $sql = "SELECT * FROM tblusuario WHERE email= '$retorno'";
     $resultado = mysqli_query(conn(), $sql);
     $usuario = mysqli_fetch_array($resultado);
     return $usuario;
