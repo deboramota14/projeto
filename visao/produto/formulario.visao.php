@@ -11,6 +11,7 @@
 				<option>Acessórios</option>
 			</select>
   preço: <input type="text" name="preco" value="<?=@$produto['preco']?>">
+
   
   <button type="submit">Enviar</button>
 </form>

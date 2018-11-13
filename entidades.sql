@@ -6,6 +6,7 @@ CREATE TABLE tblProduto (
 	descricao VARCHAR(100) not null,
 	tipoproduto VARCHAR (100) not null,
 	preco VARCHAR(20) not null,
+	quantidade INT,
 
 	PRIMARY KEY (idProduto)
 
@@ -41,3 +42,6 @@ CREATE TABLE tblPedido (
 	PRIMARY KEY (IdPedido),
 	FOREIGN KEY (idProduto) REFERENCES tblProduto(idProduto)
 ) engine = innodb;
+
+INSERT INTO tblUsuario(nomeUsuario, cpf, email, telefone, sexo, senha, tipouser)
+VALUES("Cadé","1546585","cade@gmail.com","9965845","F","123",1);

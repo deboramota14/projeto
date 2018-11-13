@@ -50,7 +50,7 @@ $quantidade = 0;
         <td><?=$produtos['preco']?></td>
         <td><?=$quantidade?></td>
         <td><a href="./carrinho/deletar/<?=$produtos['idproduto']?>" class="btn btn-danger">Deletar</a></td>
-        
+        <td><a href="./carrinho/comprar/<?=$produtos['idproduto']?>" class="btn btn-danger">Finalizar compra!</a></td>
     </tr>
       
     <?php endforeach; ?>
